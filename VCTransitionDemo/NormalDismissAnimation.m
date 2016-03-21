@@ -29,11 +29,17 @@
     UIView *containerView = [transitionContext containerView];
     [containerView addSubview:toVC.view];
     [containerView sendSubviewToBack:toVC.view];
-
+    
     // 4. Do animate now
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     [UIView animateWithDuration:duration animations:^{
         fromVC.view.frame = finalFrame;
+        
+        
+        
+        CGFloat scaleBack = (1 / 0.9);
+        toVC.view.layer.transform = CATransform3DScale(toVC.view.layer.transform, scaleBack, scaleBack, 1);
+        toVC.view.alpha = 1.0f;
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];

@@ -28,6 +28,13 @@
     UIView *containerView = [transitionContext containerView];
     [containerView addSubview:toVC.view];
     
+    
+    
+    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    
+    
+    
+    
     // 4. Do animate now
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     [UIView animateWithDuration:duration
@@ -36,10 +43,27 @@
           initialSpringVelocity:0.0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
+                         
                          toVC.view.frame = finalFrame;
+                         
+                         fromViewController.view.transform = CGAffineTransformScale(fromViewController.view.transform, 0.9, 0.9);
+                         fromViewController.view.alpha = 0.5;
+                         
+                         
                      } completion:^(BOOL finished) {
                          // 5. Tell context that we completed.
                          [transitionContext completeTransition:YES];
                      }];
+    
+    
+    //    [UIView animateWithDuration:duration animations:^{
+    //        toVC.view.frame = finalFrame;
+    //
+    //        fromViewController.view.transform = CGAffineTransformScale(fromViewController.view.transform, 0.9, 0.9);
+    //        fromViewController.view.alpha = 0.5;
+    //
+    //    } completion:^(BOOL finished) {
+    //        [transitionContext completeTransition:YES];
+    //    }];
 }
 @end

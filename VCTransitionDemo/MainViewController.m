@@ -35,8 +35,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    self.view.backgroundColor=[UIColor  yellowColor];
+    // Do any additional setup after loading the view.
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.backgroundColor=[UIColor  blackColor];
     button.frame = CGRectMake(80.0, 210.0, 160.0, 40.0);
     [button setTitle:@"Click me" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -48,6 +51,7 @@
     ModalViewController *mvc =  [[ModalViewController alloc] init];
     mvc.transitioningDelegate = self;
     mvc.delegate = self;
+    mvc.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.transitionController wireToViewController:mvc];
     [self presentViewController:mvc animated:YES completion:nil];
 }
@@ -55,6 +59,7 @@
 -(void)modalViewControllerDidClickedDismissButton:(ModalViewController *)viewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,6 +79,8 @@
 }
 
 -(id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
+    
+    NSLog(@"___________%d",self.transitionController.interacting);
     return self.transitionController.interacting ? self.transitionController : nil;
 }
 

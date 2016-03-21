@@ -18,7 +18,7 @@
     
     MainViewController *mvc = [[MainViewController alloc] init];
     self.window.rootViewController = mvc;
-    self.window.backgroundColor = [UIColor whiteColor];
+    //self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
